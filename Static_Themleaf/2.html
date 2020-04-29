@@ -1,0 +1,741 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>乐优商城--商品详情页</title>
+    <link rel="icon" href="/assets/img/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/css/webbase.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/pages-item.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/pages-zoom.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/widget-cartPanelView.css"/>
+
+    <style type="text/css">
+        .goods-intro-list li {
+            display: inline-block;
+            width: 300px;
+        }
+
+        .Ptable {
+            margin: 10px 0;
+        }
+
+        .Ptable-item {
+            padding: 12px 0;
+            line-height: 220%;
+            color: #999;
+            font-size: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .Ptable-item h3 {
+            width: 110px;
+            text-align: right;
+        }
+
+        .Ptable-item h3, .package-list h3 {
+            font-weight: 400;
+            font-size: 12px;
+            float: left;
+        }
+
+        h3 {
+            display: block;
+            font-size: 1.17em;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            font-weight: bold;
+        }
+
+        .Ptable-item dl {
+            margin-left: 110px;
+        }
+
+        dl {
+            display: block;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+        }
+
+        .Ptable-item dt {
+            width: 160px;
+            float: left;
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        .Ptable-item dd {
+            margin-left: 210px;
+        }
+
+        dd {
+            display: block;
+            -webkit-margin-start: 40px;
+        }
+
+        .package-list {
+            padding: 12px 0;
+            line-height: 220%;
+            color: #999;
+            font-size: 12px;
+            margin-top: -1px;
+        }
+
+        .package-list h3 {
+            width: 130px;
+            text-align: right;
+        }
+
+        .package-list p {
+            margin-left: 155px;
+            padding-right: 50px;
+        }
+    </style>
+
+    <script>
+        // sku集合
+        const skus = [{"id":2600248,"spuId":2,"title":"\u534E\u4E3A G9 \u9752\u6625\u7248 \u5475\u5475\u5475 \u91D1\u8272 3GB 16GB","images":"http:\/\/image.leyou.com\/images\/9\/5\/1524297314398.jpg","price":74900,"ownSpec":"{\"4\":\"\u91D1\u8272\",\"12\":\"3GB\",\"13\":\"16GB\"}","indexes":"1_0_0","enable":true,"createTime":"2018-04-21T15:55:14.000+08:00","lastUpdateTime":"2020-04-27T16:27:47.000+08:00","stock":9999},{"id":27359021559,"spuId":2,"title":"\u534E\u4E3A G9 \u9752\u6625\u7248 \u5475\u5475\u5475 \u767D\u8272 3GB 32GB","images":"","price":89900,"ownSpec":"{\"4\":\"\u767D\u8272\",\"12\":\"3GB\",\"13\":\"32GB\"}","indexes":"0_0_1","enable":true,"createTime":"2018-09-30T09:56:17.000+08:00","lastUpdateTime":"2020-04-27T16:27:47.000+08:00","stock":100},{"id":27359021560,"spuId":2,"title":"\u534E\u4E3A G9 \u9752\u6625\u7248 \u5475\u5475\u5475 \u91D1\u8272 3GB 32GB","images":"","price":99900,"ownSpec":"{\"4\":\"\u91D1\u8272\",\"12\":\"3GB\",\"13\":\"32GB\"}","indexes":"1_0_1","enable":true,"createTime":"2018-09-30T09:58:54.000+08:00","lastUpdateTime":"2020-04-27T16:27:47.000+08:00","stock":100}];
+        const groups = [{"id":1,"cid":76,"name":"\u4E3B\u4F53","specParams":[{"id":1,"cid":76,"groupId":1,"name":"\u54C1\u724C","numeric":false,"unit":"","generic":true,"searching":false,"segments":""},{"id":2,"cid":76,"groupId":1,"name":"\u578B\u53F7","numeric":false,"unit":"","generic":true,"searching":false,"segments":""},{"id":3,"cid":76,"groupId":1,"name":"\u4E0A\u5E02\u5E74\u4EFD","numeric":true,"unit":"\u5E74","generic":true,"searching":false,"segments":""}]},{"id":2,"cid":76,"name":"\u57FA\u672C\u4FE1\u606F","specParams":[{"id":4,"cid":76,"groupId":2,"name":"\u673A\u8EAB\u989C\u8272","numeric":false,"unit":"","generic":false,"searching":false,"segments":""},{"id":5,"cid":76,"groupId":2,"name":"\u673A\u8EAB\u91CD\u91CF\uFF08g\uFF09","numeric":true,"unit":"g","generic":true,"searching":false,"segments":""},{"id":6,"cid":76,"groupId":2,"name":"\u673A\u8EAB\u6750\u8D28\u5DE5\u827A","numeric":false,"unit":"","generic":true,"searching":false,"segments":""}]},{"id":3,"cid":76,"name":"\u64CD\u4F5C\u7CFB\u7EDF","specParams":[{"id":7,"cid":76,"groupId":3,"name":"\u64CD\u4F5C\u7CFB\u7EDF","numeric":false,"unit":"","generic":true,"searching":true,"segments":""}]},{"id":4,"cid":76,"name":"\u4E3B\u82AF\u7247","specParams":[{"id":8,"cid":76,"groupId":4,"name":"CPU\u54C1\u724C","numeric":false,"unit":"","generic":true,"searching":true,"segments":""},{"id":9,"cid":76,"groupId":4,"name":"CPU\u578B\u53F7","numeric":false,"unit":"","generic":true,"searching":false,"segments":""},{"id":10,"cid":76,"groupId":4,"name":"CPU\u6838\u6570","numeric":false,"unit":"","generic":true,"searching":true,"segments":""},{"id":11,"cid":76,"groupId":4,"name":"CPU\u9891\u7387","numeric":true,"unit":"GHz","generic":true,"searching":true,"segments":"0-1.0,1.0-1.5,1.5-2.0,2.0-2.5,2.5-"}]},{"id":5,"cid":76,"name":"\u5B58\u50A8","specParams":[{"id":12,"cid":76,"groupId":5,"name":"\u5185\u5B58","numeric":false,"unit":"","generic":false,"searching":true,"segments":""},{"id":13,"cid":76,"groupId":5,"name":"\u673A\u8EAB\u5B58\u50A8","numeric":false,"unit":"","generic":false,"searching":true,"segments":""}]},{"id":6,"cid":76,"name":"\u6444\u50CF\u5934","specParams":[{"id":16,"cid":76,"groupId":6,"name":"\u524D\u7F6E\u6444\u50CF\u5934","numeric":true,"unit":"\u4E07","generic":true,"searching":true,"segments":"0-500,500-1000,1000-1500,1500-2000,2500-"},{"id":17,"cid":76,"groupId":6,"name":"\u540E\u7F6E\u6444\u50CF\u5934","numeric":true,"unit":"\u4E07","generic":true,"searching":true,"segments":"0-500,500-1000,1000-1500,1500-2000,2500-"}]},{"id":7,"cid":76,"name":"\u7535\u6C60\u4FE1\u606F","specParams":[{"id":18,"cid":76,"groupId":7,"name":"\u7535\u6C60\u5BB9\u91CF\uFF08mAh\uFF09","numeric":true,"unit":"mAh","generic":true,"searching":true,"segments":"0-2000,2000-3000,3000-4000,4000-"}]},{"id":11,"cid":76,"name":"\u5C4F\u5E55","specParams":[{"id":14,"cid":76,"groupId":11,"name":"\u4E3B\u5C4F\u5E55\u5C3A\u5BF8\uFF08\u82F1\u5BF8\uFF09","numeric":true,"unit":"\u82F1\u5BF8","generic":true,"searching":true,"segments":"0-4.0,4.0-5.0,5.0-5.5,5.5-6.0,6.0-"},{"id":15,"cid":76,"groupId":11,"name":"\u5206\u8FA8\u7387","numeric":false,"unit":"","generic":true,"searching":false,"segments":""}]},{"id":19,"cid":76,"name":"\u827E\u7C73","specParams":[]}];
+        this.skus = skus;
+        // 规格参数id与name对
+        const paramMap = {"1":"\u54C1\u724C","2":"\u578B\u53F7","3":"\u4E0A\u5E02\u5E74\u4EFD","4":"\u673A\u8EAB\u989C\u8272","5":"\u673A\u8EAB\u91CD\u91CF\uFF08g\uFF09","6":"\u673A\u8EAB\u6750\u8D28\u5DE5\u827A","7":"\u64CD\u4F5C\u7CFB\u7EDF","8":"CPU\u54C1\u724C","9":"CPU\u578B\u53F7","10":"CPU\u6838\u6570","11":"CPU\u9891\u7387","12":"\u5185\u5B58","13":"\u673A\u8EAB\u5B58\u50A8","14":"\u4E3B\u5C4F\u5E55\u5C3A\u5BF8\uFF08\u82F1\u5BF8\uFF09","15":"\u5206\u8FA8\u7387","16":"\u524D\u7F6E\u6444\u50CF\u5934","17":"\u540E\u7F6E\u6444\u50CF\u5934","18":"\u7535\u6C60\u5BB9\u91CF\uFF08mAh\uFF09"};
+        // 特有规格参数集合
+        const specialSpec = JSON.parse("{\"4\":[\"\u767D\u8272\",\"\u91D1\u8272\",\"\u73AB\u7470\u91D1\"],\"12\":[\"3GB\"],\"13\":[\"16GB\",\"32GB\"]}");
+        const genericSpec = JSON.parse("{\"1\":\"\u5176\u5B83\",\"2\":\"G9\u9752\u6625\u7248\uFF08\u5168\u7F51\u901A\u7248\uFF09\",\"3\":2016,\"5\":143,\"6\":\"\u5176\u5B83\",\"7\":\"Android\",\"8\":\"\u9A81\u9F99\uFF08Snapdragon)\",\"9\":\"\u9A81\u9F99617\uFF08msm8952\uFF09\",\"10\":\"\u516B\u6838\",\"11\":1.5,\"14\":5.2,\"15\":\"1920*1080(FHD)\",\"16\":800,\"17\":1300,\"18\":3000}");
+        const indexes = {};
+        Object.keys(specialSpec).forEach(k => indexes[k] = 0);
+        const param = {};
+        Object.keys(paramMap).forEach(k => Object.keys(specialSpec).includes(k) ? param[paramMap[k]] = specialSpec[k][indexes[k]] : param[paramMap[k]] = genericSpec[k])
+    </script>
+    <!--<script th:inline="javascript">
+        const a = /**/ null;
+        const b = /*{1=品牌, 2=型号, 3=上市年份, 4=机身颜色, 5=机身重量（g）, 6=机身材质工艺, 7=操作系统, 8=CPU品牌, 9=CPU型号, 10=CPU核数, 11=CPU频率, 12=内存, 13=机身存储, 14=主屏幕尺寸（英寸）, 15=分辨率, 16=前置摄像头, 17=后置摄像头, 18=电池容量（mAh）}*/ null;
+        const c = /*[Category(id=74, name=手机, parentId=null, isParent=null, sort=null), Category(id=75, name=手机通讯, parentId=null, isParent=null, sort=null), Category(id=76, name=手机, parentId=null, isParent=null, sort=null)]*/ null;
+        const d = /*Spu(id=2, brandId=8557, cid1=74, cid2=75, cid3=76, title=华为 G9 青春版 呵呵呵, subTitle=骁龙芯片！3GB运行内存！索尼1300万摄像头！&lt;a href=&#39;https://sale.jd.com/act/DhKrOjXnFcGL.html&#39; target=&#39;_blank&#39;&gt;华为新品全面上线，更多优惠猛戳》》&lt;/a&gt;, saleable=true, valid=null, createTime=Sat Apr 21 15:55:15 CST 2018, lastUpdateTime=null)*/ null;
+        const e = /*SpuDetail(spuId=2, description=&lt;p&gt;&lt;img src=&quot;//img20.360buyimg.com/vc/jfs/t5893/141/6838703316/1369626/15c9d88f/596c753aN075ee827.jpg&quot;&gt;&lt;/p&gt;, genericSpec={&quot;1&quot;:&quot;其它&quot;,&quot;2&quot;:&quot;G9青春版（全网通版）&quot;,&quot;3&quot;:2016,&quot;5&quot;:143,&quot;6&quot;:&quot;其它&quot;,&quot;7&quot;:&quot;Android&quot;,&quot;8&quot;:&quot;骁龙（Snapdragon)&quot;,&quot;9&quot;:&quot;骁龙617（msm8952）&quot;,&quot;10&quot;:&quot;八核&quot;,&quot;11&quot;:1.5,&quot;14&quot;:5.2,&quot;15&quot;:&quot;1920*1080(FHD)&quot;,&quot;16&quot;:800,&quot;17&quot;:1300,&quot;18&quot;:3000}, specialSpec={&quot;4&quot;:[&quot;白色&quot;,&quot;金色&quot;,&quot;玫瑰金&quot;],&quot;12&quot;:[&quot;3GB&quot;],&quot;13&quot;:[&quot;16GB&quot;,&quot;32GB&quot;]}, packingList=手机（电池内置）*1，中式充电器*1，数据线*1，半入耳式线控耳机*1，华为手机凭证*1，快速指南*1，取卡针*1，屏幕保护膜（出厂已贴）*1, afterService=本产品全国联保，享受三包服务，质保期为：一年质保)*/ null;
+        const f = /*[Sku(id=2600248, spuId=2, title=华为 G9 青春版 呵呵呵 金色 3GB 16GB, images=http://image.leyou.com/images/9/5/1524297314398.jpg, price=74900, ownSpec={&quot;4&quot;:&quot;金色&quot;,&quot;12&quot;:&quot;3GB&quot;,&quot;13&quot;:&quot;16GB&quot;}, indexes=1_0_0, enable=true, createTime=Sat Apr 21 15:55:14 CST 2018, lastUpdateTime=Mon Apr 27 16:27:47 CST 2020, stock=9999), Sku(id=27359021559, spuId=2, title=华为 G9 青春版 呵呵呵 白色 3GB 32GB, images=, price=89900, ownSpec={&quot;4&quot;:&quot;白色&quot;,&quot;12&quot;:&quot;3GB&quot;,&quot;13&quot;:&quot;32GB&quot;}, indexes=0_0_1, enable=true, createTime=Sun Sep 30 09:56:17 CST 2018, lastUpdateTime=Mon Apr 27 16:27:47 CST 2020, stock=100), Sku(id=27359021560, spuId=2, title=华为 G9 青春版 呵呵呵 金色 3GB 32GB, images=, price=99900, ownSpec={&quot;4&quot;:&quot;金色&quot;,&quot;12&quot;:&quot;3GB&quot;,&quot;13&quot;:&quot;32GB&quot;}, indexes=1_0_1, enable=true, createTime=Sun Sep 30 09:58:54 CST 2018, lastUpdateTime=Mon Apr 27 16:27:47 CST 2020, stock=100)]*/ null;
+        const g = /*Brand(id=8557, name=华为（HUAWEI）, image=http://img10.360buyimg.com/popshop/jfs/t5662/36/8888655583/7806/1c629c01/598033b4Nd6055897.jpg, letter=H)*/ null;
+    </script>-->
+</head>
+
+<body>
+
+<!-- 头部栏位 -->
+<!--页面顶部，由js动态加载-->
+<div id="itemApp">
+    <div id="nav-bottom">
+        <ly-top/>
+    </div>
+    <div class="py-container">
+        <div id="item">
+            <div class="crumb-wrap">
+                <ul class="sui-breadcrumb">
+                    <li>
+                        <a href="#">手机</a>
+                    </li>
+                    <li>
+                        <a href="#">手机通讯</a>
+                    </li>
+                    <li>
+                        <a href="#">手机</a>
+                    </li>
+                    <li>
+                        <a href="#">华为（HUAWEI）</a>
+                    </li>
+                    <li class="active">华为 G9 青春版 呵呵呵</li>
+                </ul>
+            </div>
+            <!--product-info-->
+            <div class="product-info">
+                <div class="fl preview-wrap">
+                    <!--放大镜效果-->
+                    <div class="zoom">
+                        <!--默认第一个预览-->
+                        <div id="preview" class="spec-preview">
+							<span class="jqzoom">
+								<img :jqimg="sku.images" :src="sku.images" width="400px" height="400px"/>
+							</span>
+                        </div>
+                        <!--下方的缩略图-->
+                        <div class="spec-scroll">
+                            <a class="prev">&lt;</a>
+                            <!--左右按钮-->
+                            <div class="items">
+                                <ul>
+                                    <li v-for="(img,i) in sku.images.split(',')" :key="i"><img :src="img" :bimg="img"
+                                                                                               onmousemove="preview(this)"/>
+                                    </li>
+                                    -->
+                                </ul>
+                            </div>
+                            <a class="next">&gt;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fr itemInfo-wrap">
+                    <div class="sku-name">
+                        <h4 v-text="sku.title"></h4>
+                    </div>
+                    <div class="news"><span>骁龙芯片！3GB运行内存！索尼1300万摄像头！<a href='https://sale.jd.com/act/DhKrOjXnFcGL.html' target='_blank'>华为新品全面上线，更多优惠猛戳》》</a></span></div>
+                    <div class="summary">
+                        <div class="summary-wrap">
+                            <div class="fl title"><i>价格</i></div>
+                            <div class="fl price">
+                                <i>¥</i><em>{{ly.formatPrice(sku.price)}}</em><span>降价通知</span>
+                            </div>
+                            <div class="fr remark"><i>累计评价</i><em>612188</em></div>
+                        </div>
+                        <div class="summary-wrap">
+                            <div class="fl title">
+                                <i>促　　销</i>
+                            </div>
+                            <div class="fl fix-width">
+                                <i class="red-bg">加价购</i>
+                                <em class="t-gray">满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换
+                                    购热销商品</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="support">
+                        <div class="summary-wrap">
+                            <div class="fl title">
+                                <i>支　　持</i>
+                            </div>
+                            <div class="fl fix-width">
+                                <em class="t-gray">以旧换新，闲置手机回收 4G套餐超值抢 礼品购</em>
+                            </div>
+                        </div>
+                        <div class="summary-wrap">
+                            <div class="fl title">
+                                <i>配 送 至</i>
+                            </div>
+                            <div class="fl fix-width">
+                                <em class="t-gray">上海 <span>有货</span></em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix choose">
+                        <div id="specification" class="summary-wrap clearfix">
+                            <dl v-for="(spec,i) in specialSpec" :key="i">
+                                <dt>
+                                    <div class="fl title">
+                                        <i v-text="paramMap[i]"></i>
+                                    </div>
+                                </dt>
+                                <dd v-for="(s,k) in spec" :key="k" @click="indexes[i]=k">
+                                    <a href="javascript:;" :class="{selected:indexes[i]===k}">
+                                        {{s}}<span title="点击取消选择">&nbsp;</span>
+                                    </a>
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <div class="summary-wrap">
+                            <div class="fl title">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input autocomplete="off" type="text" disabled v-model="num" minnum="1"
+                                               class="itxt"/>
+                                        <a href="javascript:void(0)" class="increment plus" @click="increment">+</a>
+                                        <a href="javascript:void(0)" class="increment mins" @click="decrement">-</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fl">
+                                <ul class="btn-choose unstyled">
+                                    <li>
+                                        <a href="javascript:void(0);" target="_blank"
+                                           class="sui-btn  btn-danger addshopcar" @click="addCart">加入购物车</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--product-detail-->
+            <div class="clearfix product-detail">
+                <div class="fl aside">
+                    <ul class="sui-nav nav-tabs tab-wraped">
+                        <li class="active">
+                            <a href="#index" data-toggle="tab">
+                                <span>相关分类</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#profile" data-toggle="tab">
+                                <span>推荐品牌</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content tab-wraped">
+                        <div id="index" class="tab-pane active">
+                            <ul class="part-list unstyled">
+                                <li>手机</li>
+                                <li>手机壳</li>
+                                <li>内存卡</li>
+                                <li>Iphone配件</li>
+                                <li>贴膜</li>
+                                <li>手机耳机</li>
+                                <li>移动电源</li>
+                                <li>平板电脑</li>
+                            </ul>
+                            <ul class="goods-list unstyled">
+                                <li>
+                                    <div class="list-wrap">
+                                        <div class="p-img">
+                                            <img src="/img/_/part01.png"/>
+                                        </div>
+                                        <div class="attr">
+                                            <em>Apple苹果iPhone 6s (A1699)</em>
+                                        </div>
+                                        <div class="price">
+                                            <strong>
+                                                <em>¥</em>
+                                                <i>6088.00</i>
+                                            </strong>
+                                        </div>
+                                        <div class="operate">
+                                            <a href="javascript:void(0);" class="sui-btn btn-bordered">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list-wrap">
+                                        <div class="p-img">
+                                            <img src="/img/_/part02.png"/>
+                                        </div>
+                                        <div class="attr">
+                                            <em>Apple苹果iPhone 6s (A1699)</em>
+                                        </div>
+                                        <div class="price">
+                                            <strong>
+                                                <em>¥</em>
+                                                <i>6088.00</i>
+                                            </strong>
+                                        </div>
+                                        <div class="operate">
+                                            <a href="javascript:void(0);" class="sui-btn btn-bordered">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list-wrap">
+                                        <div class="p-img">
+                                            <img src="/img/_/part03.png"/>
+                                        </div>
+                                        <div class="attr">
+                                            <em>Apple苹果iPhone 6s (A1699)</em>
+                                        </div>
+                                        <div class="price">
+                                            <strong>
+                                                <em>¥</em>
+                                                <i>6088.00</i>
+                                            </strong>
+                                        </div>
+                                        <div class="operate">
+                                            <a href="javascript:void(0);" class="sui-btn btn-bordered">加入购物车</a>
+                                        </div>
+                                    </div>
+                                    <div class="list-wrap">
+                                        <div class="p-img">
+                                            <img src="/img/_/part02.png"/>
+                                        </div>
+                                        <div class="attr">
+                                            <em>Apple苹果iPhone 6s (A1699)</em>
+                                        </div>
+                                        <div class="price">
+                                            <strong>
+                                                <em>¥</em>
+                                                <i>6088.00</i>
+                                            </strong>
+                                        </div>
+                                        <div class="operate">
+                                            <a href="javascript:void(0);" class="sui-btn btn-bordered">加入购物车</a>
+                                        </div>
+                                    </div>
+                                    <div class="list-wrap">
+                                        <div class="p-img">
+                                            <img src="/img/_/part03.png"/>
+                                        </div>
+                                        <div class="attr">
+                                            <em>Apple苹果iPhone 6s (A1699)</em>
+                                        </div>
+                                        <div class="price">
+                                            <strong>
+                                                <em>¥</em>
+                                                <i>6088.00</i>
+                                            </strong>
+                                        </div>
+                                        <div class="operate">
+                                            <a href="javascript:void(0);" class="sui-btn btn-bordered">加入购物车</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="profile" class="tab-pane">
+                            <p>推荐品牌</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fr detail">
+                    <div class="clearfix fitting">
+                        <h4 class="kt">选择搭配</h4>
+                        <div class="good-suits">
+                            <div class="fl master">
+                                <div class="list-wrap">
+                                    <div class="p-img">
+                                        <img src="/img/_/l-m01.png"/>
+                                    </div>
+                                    <em>￥5299</em>
+                                    <i>+</i>
+                                </div>
+                            </div>
+                            <div class="fl suits">
+                                <ul class="suit-list">
+                                    <li class="">
+                                        <div id="">
+                                            <img src="/img/_/dp01.png"/>
+                                        </div>
+                                        <i>Feless费勒斯VR</i>
+                                        <label data-toggle="checkbox" class="checkbox-pretty">
+                                            <input type="checkbox"><span>39</span>
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        <div id=""><img src="/img/_/dp02.png"/></div>
+                                        <i>Feless费勒斯VR</i>
+                                        <label data-toggle="checkbox" class="checkbox-pretty">
+                                            <input type="checkbox"><span>50</span>
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        <div id=""><img src="/img/_/dp03.png"/></div>
+                                        <i>Feless费勒斯VR</i>
+                                        <label data-toggle="checkbox" class="checkbox-pretty">
+                                            <input type="checkbox"><span>59</span>
+                                        </label>
+                                    </li>
+                                    <li class="">
+                                        <div id=""><img src="/img/_/dp04.png"/></div>
+                                        <i>Feless费勒斯VR</i>
+                                        <label data-toggle="checkbox" class="checkbox-pretty">
+                                            <input type="checkbox"><span>99</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="fr result">
+                                <div class="num">已选购0件商品</div>
+                                <div class="price-tit"><strong>套餐价</strong></div>
+                                <div class="price">￥5299</div>
+                                <button class="sui-btn  btn-danger addshopcar">加入购物车</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-main intro">
+                        <ul class="sui-nav nav-tabs tab-wraped">
+                            <li class="active">
+                                <a href="#one" data-toggle="tab">
+                                    <span>商品介绍</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#two" data-toggle="tab">
+                                    <span>规格与包装</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#three" data-toggle="tab">
+                                    <span>售后保障</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#four" data-toggle="tab">
+                                    <span>商品评价</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#five" data-toggle="tab">
+                                    <span>手机社区</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <div class="tab-content tab-wraped">
+                            <div id="one" class="tab-pane active">
+                                <ul class="goods-intro-list unstyled" style="list-style: none;">
+                                    <li v-for="(param,i) in param">{{i}}:{{param}}</li>
+                                </ul>
+                                <!--商品详情-->
+                                <div class="intro-detail"><p><img src="//img20.360buyimg.com/vc/jfs/t5893/141/6838703316/1369626/15c9d88f/596c753aN075ee827.jpg"></p></div>
+                            </div>
+                            <div id="two" class="tab-pane">
+                                <div class="Ptable">
+                                    <div class="Ptable-item" v-for="(group,j) in groups" :key="j">
+                                        <h3>{{group.name}}</h3>
+                                        <dl>
+                                            <div v-for="(specParam,k) in group.specParams" :key="k">
+                                                <dt>{{specParam.name}}</dt>
+                                                <dd>{{param[specParam.name]!=''?param[specParam.name]:'其他'}}</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="package-list">
+                                    <h3>包装清单</h3>
+                                    <p>手机（电池内置）*1，中式充电器*1，数据线*1，半入耳式线控耳机*1，华为手机凭证*1，快速指南*1，取卡针*1，屏幕保护膜（出厂已贴）*1</p>
+                                </div>
+
+                            </div>
+                            <div id="three" class="tab-pane">
+                                <p>本产品全国联保，享受三包服务，质保期为：一年质保</p>
+                            </div>
+                            <div id="four" class="tab-pane">
+                                <p>商品评价</p>
+                            </div>
+                            <div id="five" class="tab-pane">
+                                <p>手机社区</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--like-->
+            <div class="clearfix"></div>
+            <div class="like">
+                <h4 class="kt">猜你喜欢</h4>
+                <div class="like-list">
+                    <ul class="yui3-g">
+                        <li class="yui3-u-1-6">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <img src="/img/_/itemlike01.png"/>
+                                </div>
+                                <div class="attr">
+                                    <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i>3699.00</i>
+                                    </strong>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有6人评价</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="yui3-u-1-6">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <img src="/img/_/itemlike02.png"/>
+                                </div>
+                                <div class="attr">
+                                    <em>Apple苹果iPhone 6s/6s Plus 16G 64G 128G</em>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i>4388.00</i>
+                                    </strong>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有700人评价</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="yui3-u-1-6">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <img src="/img/_/itemlike03.png"/>
+                                </div>
+                                <div class="attr">
+                                    <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i>4088.00</i>
+                                    </strong>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有700人评价</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="yui3-u-1-6">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <img src="/img/_/itemlike04.png"/>
+                                </div>
+                                <div class="attr">
+                                    <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i>4088.00</i>
+                                    </strong>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有700人评价</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="yui3-u-1-6">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <img src="/img/_/itemlike05.png"/>
+                                </div>
+                                <div class="attr">
+                                    <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i>4088.00</i>
+                                    </strong>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有700人评价</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="yui3-u-1-6">
+                            <div class="list-wrap">
+                                <div class="p-img">
+                                    <img src="/img/_/itemlike06.png"/>
+                                </div>
+                                <div class="attr">
+                                    <em>DELL戴尔Ins 15MR-7528SS 15英寸 银色 笔记本</em>
+                                </div>
+                                <div class="price">
+                                    <strong>
+                                        <em>¥</em>
+                                        <i>4088.00</i>
+                                    </strong>
+                                </div>
+                                <div class="commit">
+                                    <i class="command">已有700人评价</i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/js/vue/vue.js"></script>
+<script src="/js/axios.min.js"></script>
+<script src="/js/common.js"></script>
+
+<script>
+    var itemVm = new Vue({
+        el: "#itemApp",
+        data: {
+            ly,
+            skus,
+            paramMap,
+            specialSpec,
+            indexes,
+            param,
+            groups,
+            genericSpec,
+            num: 1
+        },
+        components: {
+            lyTop: () => import('/js/pages/top.js')
+        },
+        computed: {
+            sku() {
+                const index = Object.values(this.indexes).join("_");
+                var s = {};
+                this.skus.forEach(sku => {
+                    sku.indexes === index ? s = sku : ''
+                })
+                return s;
+            }
+        },
+        methods: {
+            increment() {
+                this.num++;
+            },
+            decrement() {
+                this.num--;
+            },
+            addCart() {
+                ly.http.get("/auth/verify").then((resp) => {
+                    //登录状态中
+                    const carts=[];
+                    const cart={};
+                    cart.skuId=this.sku.id;
+                    cart.num=this.num;
+                    carts.push(cart);
+                    ly.http.post("/cart",carts).then(()=>{
+                        window.location.href = "http://www.leyou.com/cart.html";
+                    })
+
+                }).catch(() => {
+                    //未登录状态应将当前sku及其数量存入本地
+                    const carts = ly.store.get("carts") || [];
+                    let cart = carts.find(c=> c.skuId === this.sku.id)
+                    if (cart) {
+                        //如果本地购物车有该商品，则在该商品的基础上加上当前num
+                        cart.num += this.num;
+                    } else {
+                        //如果本地购物车(localStorage)没有存当前sku就直接加入当前sku
+                        cart = {
+                            skuId: this.sku.id,
+                            title: this.sku.title,
+                            image: this.sku.images.split(",")[0],
+                            price: this.sku.price,
+                            num: this.num,
+                            ownSpec: JSON.stringify(this.sku.ownSpec)
+                        };
+                        carts.push(cart);
+                    }
+                    ly.store.set("carts", carts);
+                    window.location.href = "http://www.leyou.com/cart.html";
+                })
+            }
+        }
+    });
+</script>
+
+<script type="text/javascript" src="/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#service").hover(function () {
+            $(".service").show();
+        }, function () {
+            $(".service").hide();
+        });
+        $("#shopcar").hover(function () {
+            $("#shopcarlist").show();
+        }, function () {
+            $("#shopcarlist").hide();
+        });
+
+    })
+</script>
+<script type="text/javascript" src="/js/model/cartModel.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.jqzoom/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.jqzoom/zoom.js"></script>
+<script type="text/javascript" src="index/index.js"></script>
+
+</body>
+
+</html>

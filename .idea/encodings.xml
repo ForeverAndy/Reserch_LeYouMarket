@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-authentication" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-authentication/Leyou-authentication-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-authentication/Leyou-authentication-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-cart" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-item" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-item/Leyou-item-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-item/Leyou-item-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-page" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-sms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-upload" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-user/Leyou-user-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Leyou-user/Leyou-user-service" charset="UTF-8" />
+  </component>
+</project>

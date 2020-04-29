@@ -1,0 +1,81 @@
+#设置spring boot启动的端口号
+server:
+  port: 10010
+
+#设置spring boot启动的ID
+spring:
+  application:
+    name: api-gateway
+
+#添加路由前缀
+zuul:
+  prefix: /api  #此前缀都会被拦截
+  #以下就是子拦截
+  routes:
+    item-service: /item/**
+    #这样写就 不会 把upload前缀去掉在传入service
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false
+    search-service: /search/**
+    user-service: /user/**
+    auth-service: /auth/**
+    cart-service: /cart/**
+    order-service: /order/**
+  add-host-header: true    #配置允许携带请求头中的host信息到微服务
+  sensitive-headers:       #指定需要过滤的敏感头信息(空着说明不过滤),不写会使用的ZuulProperties默认配置过滤
+
+
+#spring分布式配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+
+
+
+##熔断超时时长
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+
+
+#ribbon适用于负载均衡的,这些都在AbstractRibbonCommand中有
+ribbon:
+  ConnectTimeout: 1000 #单位ms,请求连接超时时间（连接超时）
+  ReadTimeout: 3500 #单位ms,请求处理的超时时间（读取超时）
+#    OkToRetryOnAllOperations: true #对所有操作请求都进行重试
+  MaxAutoRetriesNextServer: 0 #切换实例的重试次数
+  MaxAutoRetries: 0 #对当前实例的重试次数（重试可能出现问题，比如增加操作，增加两次）
+
+
+
+
+
+#jwt需要的自定义配置  JSON Web Token
+leyou:
+  jwt:
+    pubKeyPath: F:\Work\Java-Work\Reserch_LeYouMarket\Leyou-authentication\Leyou-authentication-common\src\main\resources\rsa.pub # 公钥地址
+    cookieName: LY_TOKEN
+  filter:   #过滤器自定义配置
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item
+
+
+
+
+
+

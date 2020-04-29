@@ -1,0 +1,31 @@
+server:
+  port: 8811
+spring:
+  application:
+    name: auth-service
+  rabbitmq:
+      host: 192.168.210.130
+      username: admin
+      password: root
+      virtual-host: /leyou    #在RabbitMQ中可以虚拟消息服务器VirtualHost，每个VirtualHost相当月一个相对独立的RabbitMQ服务器，每个VirtualHost之间是相互隔离的。exchange、queue、message不能互通。 相当于mysql的db。
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 10
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port}
+
+#jwt需要的自定义配置
+leyou:
+  jwt:
+    secret: ly@Login(Auth}*^31)&heiMa% # 用于生成rsa公钥和私钥的密文,越复杂越好
+    pubKeyPath: F:\Work\Java-Work\Reserch_LeYouMarket\Leyou-authentication\Leyou-authentication-common\src\main\resources\rsa.pub # 公钥地址
+    priKeyPath: F:\Work\Java-Work\Reserch_LeYouMarket\Leyou-authentication\Leyou-authentication-common\src\main\resources\rsa.pri # 私钥地址
+    expire: 30   # 过期时间,单位分钟
+    cookieMaxAge: 1800
+    cookieName: LY_TOKEN

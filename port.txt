@@ -1,0 +1,18 @@
+item-port 8081
+upload 8805
+search 8806
+page  8807
+sms 8809
+user-service 8810
+auth 8811
+cart 8812
+order 8813
+
+
+
+邮箱授权码：
+NWXYKGGCZVUVCUKG
+
+smtp.163.com
+
+

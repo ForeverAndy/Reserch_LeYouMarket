@@ -1,0 +1,44 @@
+#spring boot应用启动的端口
+server:
+  port: 8081
+
+#spring的具体配置
+spring:
+  application:
+    name: item-service #springboot应用的id
+  datasource:
+    url: jdbc:mysql://localhost:3306/reserch_leyoumarket #根据mysql字段，就能加载相应的驱动
+    username: root
+    password: root
+  rabbitmq:
+      host: 192.168.210.130
+      username: admin
+      password: root
+      virtual-host: /leyou    #在RabbitMQ中可以虚拟消息服务器VirtualHost，每个VirtualHost相当月一个相对独立的RabbitMQ服务器，每个VirtualHost之间是相互隔离的。exchange、queue、message不能互通。 相当于mysql的db。
+      template:  #配置spring整合rabbitmq的AmqpTemplate
+        retry:
+          enabled: true    #开启重试
+          initial-interval: 10000ms   #首次失败10s后重试
+          max-interval: 30000ms   #最大重试间隔
+          multiplier: 2   #重试间隔2倍增长,使重试间隔越来越长
+        exchange: ly.item.exchange    #默认把消息发到此交换机
+      publisher-confirms: true    #开启生产者确认,若发送失败则会重试
+
+
+
+#配置eureka请求注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1 #若电脑联网可能是192.168...，故特指
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #sql语句显示
+
+
+
+

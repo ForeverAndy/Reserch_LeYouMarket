@@ -1,0 +1,17 @@
+server:
+  port: 8809 #设置端口号
+spring:
+  application:
+    name: sms-service #定义微服务的名称，对应在注册中心可以找到
+  rabbitmq:
+    host: 192.168.210.130 #定义消息队列的地址，账号，密码，以及虚拟机
+    username: admin
+    password: root
+    virtual-host: /leyou
+
+ly:  #自己的一些配置
+  sms:
+    accessKeyId: LTAIwxD1ToiyDBph #
+    accessKeySecret: IjejVP3ZfNaCTtENCp6uE3Cg4VBFme # \u4F60\u81EA\u5DF1\u7684AccessKeySecret
+    signName: 乐优 # 签名
+    verifyCodeTemplate: SMS_144150327 # \u6A21\u677F\u540D\u79F0

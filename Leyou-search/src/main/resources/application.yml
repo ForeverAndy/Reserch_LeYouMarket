@@ -1,0 +1,30 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: search-service
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 192.168.210.130:9300
+  jackson:
+    default-property-inclusion: non_null   #是null的字段不要给view
+
+  rabbitmq:
+      host: 192.168.210.130
+      username: admin
+      password: root
+      virtual-host: /leyou    #在RabbitMQ中可以虚拟消息服务器VirtualHost，每个VirtualHost相当月一个相对独立的RabbitMQ服务器，每个VirtualHost之间是相互隔离的。exchange、queue、message不能互通。 相当于mysql的db。
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000

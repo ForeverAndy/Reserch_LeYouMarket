@@ -1,0 +1,38 @@
+server:
+  port: 8810
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/reserch_leyoumarket
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+      host: localhost
+  rabbitmq:
+      host: 192.168.210.130
+      username: admin
+      password: root
+      virtual-host: /leyou
+      template:
+        retry:
+          enabled: true
+          initial-interval: 10000ms
+          max-interval: 210000ms
+          multiplier: 2
+      publisher-confirms: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    #显示127.0.0.1:8810
+    instance-id: ${eureka.instance.ip-address}.${server.port}  #不写这条就会显示JE6RR90XXXXXX.mshome.net:search-service:8086
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 10
+
+mybatis:
+  type-aliases-package: com.leyou.item.pojo

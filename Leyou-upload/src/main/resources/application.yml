@@ -1,0 +1,30 @@
+#设置spring boot启动的端口号
+server:
+  port: 8805
+
+#设置spring boot启动的应用ID
+spring:
+  application:
+    name: upload-service
+
+  servlet:
+    multipart:
+      max-file-size: 5MB #限制文件上传大小 这是单个文件 若一个请求有多个文件也没办法，但有别的配置
+
+
+
+
+#设置eureka注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  #    fetch-registry: false #表示不拉取服务列表
+  #    register-with-eureka: false #表示不注册
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1 #若电脑联网可能是192.168...，故特指
+
+
+
+
